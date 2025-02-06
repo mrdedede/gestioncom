@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -50,7 +49,7 @@ public class ClientController {
     }
 
     @PostMapping("signup")
-    public RedirectView signUpPost(@RequestBody String email, @RequestParam String password,
+    public RedirectView signUpPost(@RequestParam String email, @RequestParam String password,
             @RequestParam String nom, @RequestParam String prenom, HttpSession session) {
         try {
             session.setAttribute("client", service.signup(email, password, nom, prenom));

@@ -13,8 +13,11 @@ public class ClientService implements ClientInterface {
     private ClientRepository repo;
 
     public Client login(String email, String password) throws Exception {
-        List<Client> loginPossibilities = findByEmailAndPassword(email, password);
-        if(loginPossibilities.size() > 0) {
+        List<Client> loginPossibilities = repo.findByEmailAndPassword(email, password);
+        System.out.println("Login Pos");
+        System.out.println(loginPossibilities);
+        if(loginPossibilities.size() == 0) {
+            System.out.println("Failed");
             throw new Exception("Login failed");
         } else {
             return loginPossibilities.get(0);
