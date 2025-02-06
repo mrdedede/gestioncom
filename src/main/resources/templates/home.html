@@ -1,0 +1,10 @@
+<html>
+    <body>
+        <span th:each="client : ${clients}">
+            <h1>Bienvenu <span th:text="${client.prenom}"></span></h1>
+        </span>
+        <form action="/store/logout" method="post">
+            <button>Déconexion</button>
+        </form>
+    </body>
+</html>
