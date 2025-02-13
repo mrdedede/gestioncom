@@ -1,8 +1,12 @@
 package com.example.gestioncom.commande;
 
+import com.example.gestioncom.clients.Client;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Commande {
@@ -11,18 +15,19 @@ public class Commande {
     @GeneratedValue
     private long id;
 
+    @ManyToOne
+    @JoinColumn(name="id_client", nullable = false)
+    private Client client;
+
     private String nom;
-    private long idClient;
 
     public Commande() {}
 
-    public Commande(String nom, long idClient) {
+    public Commande(Client client, String nom) {
+        this.client = client;
         this.nom = nom;
-        this.idClient = idClient;
     }
 
-    public void setNom(String nom) { this.nom = nom; }
-    public void setIdClient(long idClient) { this.idClient = idClient; }
     public String getNom() { return this.nom; }
-    public long getIdClient() { return this.idClient; }
+    public void setNom(String nom) { this.nom = nom; }
 }

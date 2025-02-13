@@ -29,6 +29,7 @@ public class Client {
     public String getPassword() { return this.password; }
     public String getNom() { return this.nom; }
     public String getPrenom() { return this.prenom; }
+    public long getId() { return this.id; }
     public void setEmail(String email) {this.email = email;}
     public void setPassword(String password) {this.password = password;}
     public void setNom(String nom) {this.nom = nom;}

@@ -1,6 +1,6 @@
 package com.example.gestioncom.clients;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import com.example.gestioncom.commande.Commande;
+import com.example.gestioncom.commande.CommandeService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,14 +24,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ClientController {
 
     @Autowired
-    private ClientService service;
+    private ClientService clientService;
 
+    @Autowired
+    private CommandeService commandeService;
     
     @GetMapping("home")
     public ModelAndView homeScreen(HttpSession session) {
         try {
             if((boolean) session.getAttribute("isLogged")) {
-                return new ModelAndView("home.html", Map.of("clients", session.getAttribute("client")));
+                ModelAndView homeScreen = new ModelAndView("home.html");
+                homeScreen.addObject("clients", session.getAttribute("client"));
+                List<Commande> commandesClient = commandeService.findByClientId((Client) session.getAttribute("client"));
+                homeScreen.addObject("commandes", commandesClient);
+                return homeScreen;
             } else {
                 return new ModelAndView("login.html");
             }
@@ -40,7 +49,7 @@ public class ClientController {
     @PostMapping("login")
     public RedirectView loginPost(@RequestParam String email, @RequestParam String password, HttpSession session) {
         try {
-            session.setAttribute("client", service.login(email, password));
+            session.setAttribute("client", clientService.login(email, password));
             session.setAttribute("isLogged", true);
             return new RedirectView("/store/home");
         } catch(Exception e) {
@@ -52,7 +61,7 @@ public class ClientController {
     public RedirectView signUpPost(@RequestParam String email, @RequestParam String password,
             @RequestParam String nom, @RequestParam String prenom, HttpSession session) {
         try {
-            session.setAttribute("client", service.signup(email, password, nom, prenom));
+            session.setAttribute("client", clientService.signup(email, password, nom, prenom));
             session.setAttribute("isLogged", true);
             return new RedirectView("/store/home");
         } catch(Exception e) {
@@ -68,6 +77,9 @@ public class ClientController {
     }
     
     
-    
-    
+    @PostMapping("commande/creation")
+    public RedirectView creation(@RequestParam String nom, HttpSession session) {
+        commandeService.createCommande((Client) session.getAttribute("client"), nom);
+        return new RedirectView("/store/home");
+    }
 }
