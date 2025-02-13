@@ -1,4 +1,4 @@
-package com.example.gestioncom.commande;
+package com.example.gestioncom.commandes;
 
 import java.util.List;
 
@@ -15,6 +15,14 @@ public class CommandeService {
 
     public List<Commande> findByClientId(Client client) {
         return repo.findByClientId(client.getId());
+    }
+
+    public Commande findById(Long id) {
+        try {
+            return repo.findById(id).get();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Commande createCommande(Client client, String nom) {

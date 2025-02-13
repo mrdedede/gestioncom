@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.example.gestioncom.commande.Commande;
-import com.example.gestioncom.commande.CommandeService;
+import com.example.gestioncom.commandes.Commande;
+import com.example.gestioncom.commandes.CommandeService;
 
 import jakarta.servlet.http.HttpSession;
 

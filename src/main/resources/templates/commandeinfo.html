@@ -1,0 +1,21 @@
+<html>
+    <body>
+        <h1>Commande <span th:text="${commande.nom}"></span></h1>
+
+        <tr th:each="article: ${articles}">
+            <td th:text="${article.nom}"></td>
+            <td>
+                <form action="@{/article/{id}/effacer(id=${article.id})}" method="post">
+                    <button>Effacer</button>
+                </form>
+            </td>
+        </tr>
+
+        <form th:action="@{/commande/{command_id}/ajouter(command_id=${commande.id})}" method="post">
+            Nom: <input type="text" name="nomArticle">
+            <button>Ajouter Article</button>
+        </form>
+
+        <a th:href="@{/store/home}"><button>Retour au Accueil</button></a>
+    </body>
+</html>

@@ -1,6 +1,6 @@
-package com.example.gestioncom.commande;
+package com.example.gestioncom.articles;
 
-import com.example.gestioncom.clients.Client;
+import com.example.gestioncom.commandes.Commande;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,25 +9,26 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Commande {
+public class Article {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name="id_client", nullable = false)
-    private Client client;
+    @JoinColumn(name="commande_id", nullable = false)
+    private Commande commande;
 
     private String nom;
 
-    public Commande() {}
+    public Article() {}
 
-    public Commande(Client client, String nom) {
-        this.client = client;
+    public Article(Commande commande, String nom) {
+        this.commande = commande;
         this.nom = nom;
     }
 
     public String getNom() { return this.nom; }
     public void setNom(String nom) { this.nom = nom; }
+    public long getId() { return this.id; }
 }

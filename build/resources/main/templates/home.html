@@ -13,6 +13,7 @@
             </tr>
             <tr th:each="commande: ${commandes}">
                 <td th:text="${commande.nom}"></td>
+                <td><a th:href="@{/commande/{id}(id=${commande.id})}" th:text="${commande.id}"></a></td>
             </tr>
         </table>
 

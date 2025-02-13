@@ -1,5 +1,5 @@
 // Source code is decompiled from a .class file using FernFlower decompiler.
-package com.example.gestioncom.commande;
+package com.example.gestioncom.commandes;
 
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
