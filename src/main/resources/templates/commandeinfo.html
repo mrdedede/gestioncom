@@ -16,6 +16,10 @@
             <button>Ajouter Article</button>
         </form>
 
+        <form th:action="@{/commande/{commande_id}/imprimer(commande_id=${commande.id})}" method="post">
+            <button>Imprimer Commande</button>
+        </form>
+
         <a th:href="@{/store/home}"><button>Retour au Accueil</button></a>
     </body>
 </html>
