@@ -8,5 +8,4 @@ public interface ArticleRepository extends CrudRepository<Article, Long>{
 
     List<Article> findByCommandeId(long commandeId);
 
-    
 }

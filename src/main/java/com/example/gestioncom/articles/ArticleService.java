@@ -15,7 +15,19 @@ public class ArticleService {
         return repo.findByCommandeId(commandeId);
     }
 
+    public Article findById(Long id) {
+        try {
+            return repo.findById(id).get();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public void save(Article article){
         repo.save(article);
+    }
+
+    public void delete(Article article) {
+        repo.delete(article);
     }
 }

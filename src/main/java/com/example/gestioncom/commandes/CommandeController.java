@@ -44,4 +44,11 @@ public class CommandeController {
         articleService.save(curArticle);
         return new RedirectView("/commande/"+commandeId);
     }
+
+    @PostMapping("/{commandeId}/effacer/{articleId}")
+    public RedirectView removeArticle(@PathVariable Long commandeId, @PathVariable Long articleId) {
+        Article curArticle = articleService.findById(articleId);
+        articleService.delete(curArticle);
+        return new RedirectView("/commande/"+commandeId);
+    }
 }

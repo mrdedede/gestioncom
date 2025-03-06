@@ -5,13 +5,13 @@
         <tr th:each="article: ${articles}">
             <td th:text="${article.nom}"></td>
             <td>
-                <form action="@{/article/{id}/effacer(id=${article.id})}" method="post">
+                <form th:action="@{/commande/{commande_id}/effacer/{article_id}(commande_id=${commande.id}, article_id=${article.id})}" method="post">
                     <button>Effacer</button>
                 </form>
             </td>
         </tr>
 
-        <form th:action="@{/commande/{command_id}/ajouter(command_id=${commande.id})}" method="post">
+        <form th:action="@{/commande/{commande_id}/ajouter(commande_id=${commande.id})}" method="post">
             Nom: <input type="text" name="nomArticle">
             <button>Ajouter Article</button>
         </form>
